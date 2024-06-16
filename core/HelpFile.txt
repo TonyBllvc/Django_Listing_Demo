@@ -1,0 +1,71 @@
+## Pre-Requisites
+pip install django
+pip install djangorestframework
+pip install psycopg2
+
+## Commands to create project and app
+django-admin startproject <project name> .
+python manage.py startapp <REST API>
+
+## DB connections
+DATABASES = {
+    'default':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'restfulapiDB',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost'
+    }
+}
+
+## Model creation steps
+python manage.py makemigrations <API APP name>
+python manage.py migrate
+
+
+## Run App API
+python manage.py runserver
+
+### ********* follow through ******** ###
+1. > create and open a folder
+ run: django-admin startproject core .
+ run: python manage.py startapp user
+ run: python manage.py startapp listing
+
+2. > Now set up user code base, settings and config
+ run: python manage.py makemigrations
+
+3. > Now set up routes(for double database), and set config
+ run: python manage.py migrate user --database=users #to push user auth config
+
+&& skip if not double db &&
+### **** optional: for single db *****#####
+> run: python manage.py migrate user
+
+> Now create super user account
+ run: python manage.py createsuperuser
+
+## ***** end *****####
+
+4. > Now create super user account
+ run: python manage.py createsuperuser --database=users
+    
+        entry:
+            > Email: george.ekwemadu@gmail.com
+            > Name: George Black
+            > password: TanBlzque.203
+
+        entry for dummy files:
+            > Email: gtcekwemadu@gmail.com
+            > Email Two: georgeek66@gmail.com
+            > password(s): password
+
+
+> Now to migrate sessions
+ run: python manage.py migrate --database=users 
+
+### For listing migrations ####
+ run: python manage.py migrate listing --database=listings
+
+## Run App API
+python manage.py runserver
